@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+DATE=`date +'%Y%m%d'`
+CROSSWORD_FILE=gdn.${1:-cryptic}.${2:-$DATE}.pdf
+CROSSWORD_URL=https://crosswords-static.guim.co.uk/$CROSSWORD_FILE
+if curl --silent --show-error --output /tmp/$CROSSWORD_FILE $CROSSWORD_URL; then
+  lp /tmp/$CROSSWORD_FILE > /dev/null
+  rm -rf /tmp/$CROSSWORD_FILE
+fi
